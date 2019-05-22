@@ -1,0 +1,28 @@
+{
+  "name": "node-project",
+  "version": "1.0.0",
+  "description": "node.js project",
+  "main": "./bin/www.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zzm1220/node-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zzm1220/node-project/issues"
+  },
+  "homepage": "https://github.com/zzm1220/node-project#readme",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.19.0"
+  }
+}
