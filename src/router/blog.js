@@ -1,41 +1,70 @@
-const { getList, getDetail } = require("../controller/blog");
-const { SuccessModal, ErrorModal} = require("../model/resModal");
-
-const blogRouter = (req, res) => {
-    // method
+const {
+    SuccessModel,
+    ErrorModel
+} = require("../model/resModal");
+const {
+    getList,
+    getDetail,
+    newBlog,
+    updateBlog,
+    deleteBlog
+} = require("../controller/blog");
+const handleBlogRouter = (req, res) => {
     const method = req.method;
-
     // 获取博客列表
     if (method === "GET" && req.path === "/api/blog/list") {
-        const author = req.query.author||"";
-        const keyword = req.query.keyword||"";
-        const listData = getList(author, keyword);
-        return new SuccessModal(listData, "success");
+        const author = req.query.author || "";
+        const keyword = req.query.keyword || "";
+        const result = getList(author, keyword);
+        return result.then(listData => {
+            return new SuccessModel(listData);
+        })
     }
     // 获取博客详情
     if (method === "GET" && req.path === "/api/blog/detail") {
-        const id = req.query.id;
-        const detailData = getDetail(id);
-        return new SuccessModal(detailData, "success");
+        const id = req.query.id || 1;
+        const detailResult = getDetail(id);
+        return detailResult.then(detailData => {
+            return new SuccessModel(detailData);
+        });
     }
-    // 新增博客
+    // 新建博客
     if (method === "POST" && req.path === "/api/blog/new") {
-        return {
-            msg: "新增博客"
-        }
+        // author 假数据，待开发登录后修改
+        const author = "zhimin";
+        req.body.author = author;
+        const postData = req.body;
+        const result = newBlog(postData);
+        return result.then(data => {
+            return new SuccessModel(data);
+        })
     }
-    // 更新博客
+    // 更新一篇博客
     if (method === "POST" && req.path === "/api/blog/update") {
-        return {
-            msg: "更新博客"
-        }
+        const id = req.query.id;
+        const postData = req.body;
+        const result = updateBlog(id, postData);
+        return result.then(res => {
+            if (res) {
+                return new SuccessModel("更新博客成功");
+            } else {
+                return new ErrorModel("更新博客失败");
+            }
+        })
     }
-    // 删除博客
+    // 删除一篇博客
     if (method === "POST" && req.path === "/api/blog/del") {
-        return {
-            msg: "删除博客"
-        }
+        const id = req.query.id;
+        const author = "lisi"; // 假数据，后期登录后修改；
+        const result = deleteBlog(id, author);
+        return result.then(res => {
+            if (res) {
+                return new SuccessModel("删除博客成功");
+            } else {
+                return new ErrorModel("删除博客失败");
+            }
+        })
     }
-};
+}
 
-module.exports = blogRouter;
+module.exports = handleBlogRouter;

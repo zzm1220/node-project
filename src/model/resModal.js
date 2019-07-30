@@ -1,6 +1,6 @@
-class BaseModal {
+class BaseModel {
     constructor(data, message) {
-        if (typeof data === 'string') {
+        if (typeof data === "string") {
             this.message = data;
             data = null;
             message = null;
@@ -13,22 +13,19 @@ class BaseModal {
         }
     }
 }
-
-class SuccessModal extends BaseModal {
+class SuccessModel extends BaseModel {
     constructor(data, message) {
         super(data, message);
-        this.errno = 0;
+        this.errorno = 0;
     }
 }
-
-class ErrorModal extends BaseModal {
+class ErrorModel extends BaseModel {
     constructor(data, message) {
         super(data, message);
-        this.errno = -1;
+        this.errorno = -1;
     }
 }
-
 module.exports = {
-    SuccessModal,
-    ErrorModal
+    SuccessModel,
+    ErrorModel
 }
