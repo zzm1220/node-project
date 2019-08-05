@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("fs"); // 文件操作
+const path = require("path"); // 路径操作
 
 const fileName = path.resolve(__dirname, 'data.txt');
 // 读取文件
@@ -15,7 +15,7 @@ const fileName = path.resolve(__dirname, 'data.txt');
 // 写入文件
 // const content = "这是写入的内容\n";
 // const opt = {
-//     flag: 'a'
+//     flag: 'a' // 追加写入，覆盖用'w'
 // }
 // fs.writeFile(fileName, content, opt, err => {
 //     if (err) {
@@ -23,6 +23,8 @@ const fileName = path.resolve(__dirname, 'data.txt');
 //     }
 // });
 
+
+// 判断文件是否存在
 fs.stat(fileName, (err, stats) => {
     if (err) {
         console.log(err);

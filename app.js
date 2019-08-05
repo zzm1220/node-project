@@ -2,7 +2,7 @@ const querystring = require("querystring");
 const handleBlogRouter = require("./src/router/blog.js");
 const handleUserRouter = require("./src/router/user.js");
 const { get, set } = require("./src/db/redis.js");
-
+const { access } = require("./src/utils/log");
 const _expiresTime = () => {
     const d = new Date();
     d.setTime(d.getTime() + (24 * 60 * 60 * 1000));
@@ -36,6 +36,8 @@ const getPostData = req => {
     return promise;
 }
 const serverHandle = (req, res) => {
+    // 记录 access log
+    access(`${req.method} -- ${req.url} -- ${req.headers['user-agent']} -- ${Date.now()}`)
     // 设置返回的数据格式为json
     res.setHeader("Content-type", "application/json");
     const url = req.url;
