@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/zzm1220/node-project#readme",
   "dependencies": {
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "mysql": "^2.17.1",
     "redis": "^2.8.0"
   },
